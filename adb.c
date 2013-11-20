@@ -20,7 +20,7 @@ typedef uint8_t byte;
 
 // Make loop iteration take us total, including cyc overhead of loop logic
 #define delay_loop_usec( us, cyc ) \
-	__builtin_avr_delay_cycles( (unsigned long) (F_CPU / 1e6 * (us) + 0.5) - (cyc) )
+	_delay_us( us - ((cyc) * 1e6 / F_CPU) )
 
 #if !defined(ADB_PORT) || \
 	!defined(ADB_PIN)  || \
