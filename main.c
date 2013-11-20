@@ -23,8 +23,11 @@ typedef unsigned char byte;
 // Avoid floating inputs on unused pins
 static void pullup_ports( void )
 {
-	DDRA  = 0;
-	PORTA = 0xFF;
+	#ifdef PORTA
+		DDRA  = 0;
+		PORTA = 0xFF;
+	#endif
+	
 	DDRB  = 0;
 	PORTB = 0xFF;
 	DDRC  = 0;
