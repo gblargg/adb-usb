@@ -50,6 +50,8 @@ int main( void )
 	power_usb_enable();
 	power_timer1_enable();
 	
+	PORTD &= ~(1<<6); // don't leave LED on Teensy glowing dimly
+	
 	adb_usb_init();
 	
 	TCCR1B = 5<<CS10; // 1024 prescaler
