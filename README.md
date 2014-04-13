@@ -1,6 +1,6 @@
 ADB-to-USB adapter using Teensy
 ===============================
-This is a simple Mac ADB keyboard to ADB converter using a Teensy/Teensy++ 2.0 AVR development board. The ADB code is based on the t.m.k. Keyboard Firmware Collection, with some timing improvements to make it more robust. It uses PJRC's usb_keyboard driver for USB. I wrote this while debugging some problems with the ADB code and because the TMK collection was too big for me to understand clearly.
+This is a simple Mac ADB keyboard to ADB converter using a Teensy/Teensy++ 2.0/Pro Micro (5V 16MHz) AVR development board. The ADB code is based on the t.m.k. Keyboard Firmware Collection, with some timing improvements to make it more robust. It uses PJRC's usb_keyboard driver for USB. I wrote this while debugging some problems with the ADB code and because the TMK collection was too big for me to understand clearly.
 
 This hasn't undergone much testing by others.
 
@@ -42,7 +42,7 @@ user_keymap.h to customizes keyboard layout. There are separate layouts for the 
 
 Construction
 ------------
-* ADB +5V and GND go to Teensy +5V and GND. ADB Data goes to Teensy PD0. A 1K resistor must also be connected between ADB Data and +5V. See pinout below.
+* ADB +5V and GND go to Teensy +5V and GND. ADB Data goes to Teensy PD0 (Pin "3" on the Pro Micro). A 1K resistor must also be connected between ADB Data and +5V. See pinout below.
 
 * Extract sources and change to their directory. Modify config.h as desired.
 
