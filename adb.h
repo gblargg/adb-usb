@@ -22,7 +22,12 @@ uint16_t adb_host_kbd_recv( void );
 uint16_t adb_host_kbd_modifiers( void );
 
 // Sends command and two bytes of data to keyboard
+enum { adb_cmd_write = 0x28 };
 void adb_host_listen( uint8_t cmd, uint8_t data_h, uint8_t data_l );
+
+// Sends command and receives two bytes of data from keyboard, or adb_host_* if no response/error
+enum { adb_cmd_read  = 0x2C };
+uint16_t adb_host_talk( uint8_t cmd );
 
 // Sets keyboard LEDs. Note that bits are inverted here, so 1 means off, 0 means on.
 void adb_host_kbd_led( uint8_t led );
@@ -31,7 +36,6 @@ void adb_host_kbd_led( uint8_t led );
 bool adb_host_psw( void );
 
 
-// Legacy support
 #define ADB_POWER       0x7F
 #define ADB_CAPS        0x39
 

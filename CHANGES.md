@@ -1,3 +1,9 @@
+* Added support for waking computer by pressing power key.
+* Reorganized code.
+* Added ADB_SWAP_CMD_OPTION to act like Apple ADB keyboard
+* Added detection of extended versus compact keyboard, and use of separate keymap.
+
+
 blargg-adb-usb-3
 ----------------
 * Fixed keypad equals to KP_EQUAL instead of normal equals.

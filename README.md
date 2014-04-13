@@ -7,18 +7,44 @@ This hasn't undergone much testing by others.
 See keymap.h to customize layout.
 
 
+Files
+-----
+	usb_keyboard.c			Keyboard HID implementation
+	usb_keyboard.h	
+	usb_keyboard_event.h	Turns key press/release events into report structure
+	adb.c					ADB protocol driver
+	adb.h			
+	adb_usb.h				ADB locking caps lock, misc
+	keycode.h				
+	keymap.h				ADB to USB key code conversion
+	user_keymap.h			Key layouts for extended and compact ADB keyboards. Modify as needed.
+	main.c					Main loop, ADB polling, suspend handling, boot protocol
+	config.h				Configuration. Modify as needed.
+	Makefile				Builds program
+	README.md				Documentation
+	CHANGES.md		
+	LICENSE.txt		
+
+
 Features
 --------
 * Tested on M3501 (Apple Extended Keyboard II) and M0116 (Apple Keyboard).
-* Works through host suspend/wake.
+* Power key wakes host from sleep/suspend.
 * Adjustable ADB polling rate; comes configured for 12ms (83Hz).
+
+
+Customization
+-------------
+config.h sets some keyboard options and how ADB is connected.
+
+user_keymap.h to customizes keyboard layout. There are separate layouts for the extended and compact keyboard models.
 
 
 Construction
 ------------
-* ADB +5V and GND go to Teensy +5V and GND. ADB Data goes to Teensy D0. A 1K resistor must also be connected between ADB Data and +5V. See pinout below.
+* ADB +5V and GND go to Teensy +5V and GND. ADB Data goes to Teensy PD0. A 1K resistor must also be connected between ADB Data and +5V. See pinout below.
 
-* Extract sources and change to their directory. If you've unlocked the caps lock key on your keyboard so that it's momentary like all the other keys, open config.h and uncomment the #define UNLOCKED_CAPS line.
+* Extract sources and change to their directory. Modify config.h as desired.
 
 * Connect the Teensy and press its reset button. Execute "make flash". This will build the program and flash it to the Teensy, then run it.
 
@@ -38,7 +64,7 @@ ADB cable (male):
 
 To do
 -----
-* Wake host when power key is pressed. No idea how to do this.
+* Add media key support (volume, play/pause, etc.)
 
 
 -- 

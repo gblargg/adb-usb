@@ -16,7 +16,9 @@
 // Copyright 2013 Shay Green <gblargg@gmail.com>
 // License below
 
+#ifndef byte
 typedef uint8_t byte;
+#endif
 
 // Make loop iteration take us total, including cyc overhead of loop logic
 #define delay_loop_usec( us, cyc ) \
@@ -30,9 +32,6 @@ typedef uint8_t byte;
 #endif
 
 enum { data_mask = 1<<ADB_DATA_BIT };
-
-enum { adb_cmd_read  = 0x2C };
-enum { adb_cmd_write = 0x28 };
 
 #ifdef ADB_REDUCED_TIME
 	enum { adb_cell_time = 75 };
@@ -84,6 +83,7 @@ static void command( byte cmd )
 void adb_host_init( void )
 {
 	// Always keep port output 0, then just toggle DDR to be GND or leave it floating (high).
+	// Requires external pull-up, since internal pull-up is too weak.
 	ADB_DDR	 &= ~data_mask;
 	ADB_PORT &= ~data_mask;
 	
@@ -119,7 +119,7 @@ static byte while_data( byte us, byte data )
 static byte while_lo( byte us ) { return while_data( us, 0 ); }
 static byte while_hi( byte us ) { return while_data( us, data_mask ); }
 
-static uint16_t adb_host_talk( byte cmd )
+uint16_t adb_host_talk( uint8_t cmd )
 {
 	command( cmd );
 	_delay_us( 5 );
